@@ -8,6 +8,7 @@
   },
   "scripts": {
     "buildcss": "npx mix",
+    "mix-watch": "mix watch",
     "watch": "npx tailwindcss -i ./src/css/app.css -o ./public/asset/css/app.css --watch",
     "min": "npx tailwindcss -i ./src/css/app.css -o ./public/asset/css/app.css --minify"
   },

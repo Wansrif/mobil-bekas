@@ -22,10 +22,6 @@ class Penjualan extends Migration
                 'type'          => 'VARCHAR',
                 'constraint'    => '100',
             ],
-            'mobil' =>[
-                'type'          => 'TEXT',
-                'null'          => true,
-            ],
             'slug' =>[
                 'type'          => 'VARCHAR',
                 'constraint'    => '100',

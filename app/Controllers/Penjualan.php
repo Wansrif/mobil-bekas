@@ -6,6 +6,9 @@ use App\Controllers\BaseController;
 use App\Libraries\Slug;
 use App\Models\KategoriModel;
 use App\Models\PenjualanModel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use Dompdf\Dompdf;
 
 class Penjualan extends BaseController
 {
@@ -30,6 +33,69 @@ class Penjualan extends BaseController
         ];
 
         return view('admin/penjualan/index', $data);
+    }
+    
+
+    // EXPORT EXCEL
+    public function excel()
+    {
+        $penjualan = $this->penjualan->orderBy('waktu', 'ASC')->findAll();
+        $spreadsheet = new Spreadsheet();
+
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'Mobil')
+            ->setCellValue('B1', 'Pembeli')
+            ->setCellValue('C1', 'Whatsapp')
+            ->setCellValue('D1', 'Kategori')
+            ->setCellValue('E1', 'Terjual')
+            ->setCellValue('F1', 'Harga');
+
+        $column = 2;
+
+        foreach ($penjualan as $val) {
+            $spreadsheet->setActiveSheetIndex(0)
+                ->setCellValue('A' . $column, $val['mobil'])
+                ->setCellValue('B' . $column, $val['pembeli'])
+                ->setCellValue('C' . $column, $val['whatsapp'])
+                ->setCellValue('D' . $column, $val['nama_kategori'])
+                ->setCellValue('E' . $column, $val['waktu'])
+                ->setCellValue('F' . $column, $val['harga']);
+
+            $column++;
+        }
+
+        $writer = new Xls($spreadsheet);
+        $filename = date('Y-m-d-His'). '-Data-Penjualan';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $filename . '.xls');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+    }
+
+
+    // EXPORT PDF
+    public function pdf()
+    {
+        $data = [
+            'penjualan' => $this->penjualan->orderBy('waktu', 'ASC')->findAll()
+        ];
+
+        $html = view('admin/penjualan/pdf', $data);
+        
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'potrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream(date('Y-m-d-His'). '-Laporan-Penjualan.pdf');
     }
 
 
