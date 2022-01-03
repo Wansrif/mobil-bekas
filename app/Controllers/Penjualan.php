@@ -109,7 +109,7 @@ class Penjualan extends BaseController
         }
         
         $data = [
-            'title'     => 'Penjualan | ' . $key['mobil'],
+            'title'     => 'Laporan Penjualan | ' . $key['mobil'],
             'penjualan' => $key,
         ];
         if (empty($data['penjualan'])) {
@@ -139,57 +139,57 @@ class Penjualan extends BaseController
     public function save()
     {
         // validasi input
-    if(!$this->validate([
-        'pembeli' => [
-            'rules' => 'required',
-            'errors' => [
-            'required' => 'Masukkan nama pembeli terlebih dahulu.',
+        if(!$this->validate([
+            'pembeli' => [
+                'rules' => 'required',
+                'errors' => [
+                'required' => 'Masukkan nama pembeli terlebih dahulu.',
+                ]
+            ],
+            'mobil' => [
+                'rules' => 'required|is_unique[penjualan.mobil]',
+                'errors' => [
+                'is_unique' => 'Nama mobil sudah terdaftar',
+                'required'  => 'Masukkan nama mobil terlebih dahulu.',
+                ]
+            ],
+            'spesifikasi' => [
+                'rules' => 'required',
+                'errors' => [
+                'required' => 'Masukkan spesifikasi terlebih dahulu.',
+                ]
+            ],
+            'gambar' => [
+                'rules' => 'max_size[gambar,2048]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
+                'errors'  => [
+                'max_size'  => 'Ukuran gambar tidak boleh lebih dari 2MB',
+                'mime_in'   => 'Gambar harus berformat .jpg/.jpeg/.png'
             ]
-        ],
-        'mobil' => [
-            'rules' => 'required|is_unique[penjualan.mobil]',
-            'errors' => [
-            'is_unique' => 'Nama mobil sudah terdaftar',
-            'required'  => 'Masukkan nama mobil terlebih dahulu.',
-            ]
-        ],
-        'spesifikasi' => [
-            'rules' => 'required',
-            'errors' => [
-            'required' => 'Masukkan spesifikasi terlebih dahulu.',
-            ]
-        ],
-        'gambar' => [
-            'rules' => 'max_size[gambar,2048]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
-            'errors'  => [
-            'max_size'  => 'Ukuran gambar tidak boleh lebih dari 2MB',
-            'mime_in'   => 'Gambar harus berformat .jpg/.jpeg/.png'
-        ]
-        ],
-        'kategori' => [
-            'rules' => 'required',
-            'errors' => [
-            'required' => 'Masukkan kategori terlebih dahulu.',
-            ]
-        ],
-        'whatsapp' => [
-            'rules' => 'required',
-            'errors' => [
-            'required' => 'Masukkan No.HP / whatsapp terlebih dahulu.',
-            ]
-        ],
-        'waktu' => [
-            'rules' => 'required',
-            'errors' => [
-            'required' => 'Masukkan waktu terlebih dahulu.',
-            ]
-        ],
-        'harga' => [
-            'rules' => 'required',
-            'errors' => [
-            'required' => 'Masukkan harga terlebih dahulu.',
-            ]
-        ],
+            ],
+            'kategori' => [
+                'rules' => 'required',
+                'errors' => [
+                'required' => 'Masukkan kategori terlebih dahulu.',
+                ]
+            ],
+            'whatsapp' => [
+                'rules' => 'required',
+                'errors' => [
+                'required' => 'Masukkan No.HP / whatsapp terlebih dahulu.',
+                ]
+            ],
+            'waktu' => [
+                'rules' => 'required',
+                'errors' => [
+                'required' => 'Masukkan waktu terlebih dahulu.',
+                ]
+            ],
+            'harga' => [
+                'rules' => 'required',
+                'errors' => [
+                'required' => 'Masukkan harga terlebih dahulu.',
+                ]
+            ],
         ])) {
         return redirect()->back()->withInput();
         }
@@ -230,7 +230,7 @@ class Penjualan extends BaseController
         // cek jika file gambarnya default
         if($penjualan['gambar'] !== 'default.jpg') {
             unlink('asset/img/penjualan/' . $penjualan['gambar']);
-    }
+        }
 
         $this->penjualan->delete($id_penjualan);
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');

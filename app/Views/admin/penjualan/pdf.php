@@ -4,6 +4,7 @@
   <style>
   .text-center {
     text-align: center;
+    border-bottom: 2rem solid #000;
   }
 
   table {
