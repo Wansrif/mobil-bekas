@@ -97,7 +97,26 @@
 
 <script>
 $(document).ready(function() {
-  $('#table_id').DataTable();
+  $('#table_id').DataTable({
+    "language": {
+      "lengthMenu": "Menampilkan _MENU_ entri",
+      "zeroRecords": "Data tidak ada / belum ditambahkan",
+      "info": "_PAGE_ dari _PAGES_ halaman",
+      "infoEmpty": "Belum ada data yang ditambahkan",
+      "infoFiltered": "(filter dari _MAX_ total data)",
+      "search": "Pencarian:",
+      "paginate": {
+        "first": "Pertama",
+        "last": "Terakhir",
+        "next": "Berikutnya",
+        "previous": "Sebelumnya"
+      },
+    },
+    columnDefs: [{
+      orderable: false,
+      targets: [1, 3],
+    }]
+  });
 });
 </script>
 <?= $this->endSection() ;?>

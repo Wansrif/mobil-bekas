@@ -69,8 +69,9 @@
 
     <section
       class="antialiased prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl p-3 rounded-lg shadow-lg shadow-indigo-400">
-      <div class="">Pengirim : <?= $pesan['nama']; ?></div>
+      <div>Pengirim : <?= $pesan['nama']; ?></div>
       <div>Kontak : <?= $pesan['email']; ?> / <?= $pesan['whatsapp']; ?></div>
+      <div>Dikirim : <?= Date("d-M-Y H:i", strtotime($pesan['created_at'])); ?> WIB</div>
       <blockquote>
         <p><?= $pesan['pesan']; ?></p>
       </blockquote>

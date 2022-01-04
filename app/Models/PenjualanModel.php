@@ -21,6 +21,11 @@ class PenjualanModel extends Model
         return $this->where(['slug' => $slug])->first();
     }
 
+    public function getDate($min, $max)
+    {
+        return $this->table('penjualan')->where('waktu >=', $min)->where('waktu <=', $max);
+    }
+
     public function countPenjualan()
     {
         return $this->countAll();

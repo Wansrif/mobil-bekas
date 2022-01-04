@@ -479,13 +479,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 
-.divide-x-4 > *, .border, .border-4, .border-2, .border-0, .border-8, .border-b-2, .border-b-4, .file\:border-0::file-selector-button, .print\:border-4, .print\:border-2, .sm\:border-l-2{
+.divide-x-4 > *, .border, .border-4, .border-2, .border-0, .border-8, .border-b-2, .border-b-4, .file\:border-0::file-selector-button, .print\:border-4, .sm\:border-l-2{
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity))
 }
 
 
-.shadow-md, .shadow-xl, .shadow-sm, .shadow, .shadow-lg, .lg\:shadow-lg{
+.shadow-md, .shadow-xl, .shadow-sm, .shadow, .shadow-lg, .disabled\:shadow-none, .lg\:shadow-lg{
   --tw-ring-offset-shadow: 0 0 #0000;
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
@@ -502,6 +502,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000
+}
+
+
+.filter{
+  --tw-blur: var(--tw-empty,/*!*/ /*!*/);
+  --tw-brightness: var(--tw-empty,/*!*/ /*!*/);
+  --tw-contrast: var(--tw-empty,/*!*/ /*!*/);
+  --tw-grayscale: var(--tw-empty,/*!*/ /*!*/);
+  --tw-hue-rotate: var(--tw-empty,/*!*/ /*!*/);
+  --tw-invert: var(--tw-empty,/*!*/ /*!*/);
+  --tw-saturate: var(--tw-empty,/*!*/ /*!*/);
+  --tw-sepia: var(--tw-empty,/*!*/ /*!*/);
+  --tw-drop-shadow: var(--tw-empty,/*!*/ /*!*/);
+  --tw-filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 .container{
   width: 100%
@@ -1300,6 +1314,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-40{
   height: 10rem
 }
+.h-4{
+  height: 1rem
+}
 .h-36{
   height: 9rem
 }
@@ -1359,6 +1376,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-12{
   width: 3rem
+}
+.w-4{
+  width: 1rem
 }
 .w-36{
   width: 9rem
@@ -1689,10 +1709,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1;
   border-color: rgb(55 65 81 / var(--tw-border-opacity))
 }
-.border-black{
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity))
-}
 .bg-indigo-200{
   --tw-bg-opacity: 1;
   background-color: rgb(199 210 254 / var(--tw-bg-opacity))
@@ -2000,6 +2016,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 3rem;
   line-height: 1
 }
+.text-4xl{
+  font-size: 2.25rem;
+  line-height: 2.5rem
+}
+.text-8xl{
+  font-size: 6rem;
+  line-height: 1
+}
 .font-bold{
   font-weight: 700
 }
@@ -2026,6 +2050,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .normal-case{
   text-transform: none
+}
+.italic{
+  font-style: italic
 }
 .leading-relaxed{
   line-height: 1.625
@@ -2107,6 +2134,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity))
 }
+.text-neutral-300{
+  --tw-text-opacity: 1;
+  color: rgb(212 212 212 / var(--tw-text-opacity))
+}
+.text-neutral-500{
+  --tw-text-opacity: 1;
+  color: rgb(115 115 115 / var(--tw-text-opacity))
+}
 .underline{
   text-decoration: underline
 }
@@ -2180,6 +2215,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .outline-none{
   outline: 2px solid transparent;
   outline-offset: 2px
+}
+.filter{
+  filter: var(--tw-filter)
 }
 .transition{
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
@@ -2466,6 +2504,19 @@ Ensure the default browser behavior of the `hidden` attribute.
 .focus\:ring-offset-green-200:focus{
   --tw-ring-offset-color: #bbf7d0
 }
+.disabled\:bg-gray-50:disabled{
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+.disabled\:text-gray-500:disabled{
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+.disabled\:shadow-none:disabled{
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
 .dark .dark\:border-green-600{
   --tw-border-opacity: 1;
   border-color: rgb(22 163 74 / var(--tw-border-opacity))
@@ -2570,6 +2621,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-left: 0px
   }
 
+  .print\:mb-2{
+    margin-bottom: 0.5rem
+  }
+
   .print\:hidden{
     display: none
   }
@@ -2580,14 +2635,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .print\:w-full{
     width: 100%
-  }
-
-  .print\:table-auto{
-    table-layout: auto
-  }
-
-  .print\:border-collapse{
-    border-collapse: collapse
   }
 
   .print\:grid-cols-2{
@@ -2602,15 +2649,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .print\:border-4{
     border-width: 4px
-  }
-
-  .print\:border-2{
-    border-width: 2px
-  }
-
-  .print\:border-black{
-    --tw-border-opacity: 1;
-    border-color: rgb(0 0 0 / var(--tw-border-opacity))
   }
 
   .print\:text-3xl{

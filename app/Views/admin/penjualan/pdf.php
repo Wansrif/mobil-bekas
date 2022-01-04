@@ -4,7 +4,22 @@
   <style>
   .text-center {
     text-align: center;
+  }
+
+  .bb-2 {
     border-bottom: 2rem solid #000;
+  }
+
+  .mb-2 {
+    margin-bottom: 2rem;
+  }
+
+  .text-2 {
+    font-size: 2rem;
+  }
+
+  .text-1 {
+    font-size: 1.125rem;
   }
 
   table {
@@ -26,7 +41,10 @@
 </head>
 
 <body>
-  <h1 class="text-center">Laporan Penjualan Mobil Bekas Pafona Auto</h1>
+  <div class="bb-2 mb-2">
+    <div class="text-center text-2">Laporan Penjualan Mobil Bekas Pafona Auto</div>
+    <div class="text-center text-1"><?= $periode; ?></div>
+  </div>
   <table>
     <thead>
       <tr>
@@ -43,12 +61,12 @@
       <?php $i = 1 ?>
       <?php foreach ($penjualan as $val) : ?>
       <tr>
-        <td><?= $i++; ?></td>
+        <td class="text-center"><?= $i++; ?></td>
         <td><?= $val['mobil']; ?></td>
         <td><?= $val['pembeli']; ?></td>
         <td class="<?= ($val['whatsapp'] = '-') ? 'text-center' : ''; ?>"><?= $val['whatsapp']; ?></td>
         <td><?= $val['nama_kategori']; ?></td>
-        <td><?= $val['waktu']; ?></td>
+        <td><?= Date("d-M-Y", strtotime($val['waktu'])); ?></td>
         <td><?= $val['harga']; ?></td>
       </tr>
       <?php endforeach ?>

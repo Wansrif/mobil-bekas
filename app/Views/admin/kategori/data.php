@@ -5,7 +5,7 @@
       <tr class="h-10 bg-indigo-500 text-white">
         <th class="w-1/12 border border-indigo-500 font-medium">No.</th>
         <th class="w-1/2 border border-indigo-500 font-medium">Kategori</th>
-        <th class="w-1/6 border border-indigo-500 font-medium">Created</th>
+        <th class="w-1/6 border border-indigo-500 font-medium">Dibuat</th>
         <th class="w-1/4 border border-indigo-500 font-medium">Option</th>
       </tr>
     </thead>

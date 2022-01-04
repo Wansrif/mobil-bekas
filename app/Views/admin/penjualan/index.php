@@ -12,31 +12,137 @@
       <span><?= $title; ?></span>
     </div>
 
-    <!-- TAMBAH DATA -->
     <div class="w-full flex gap-2 flex-col md:flex-row items-center justify-start md:justify-between">
+
+      <!-- TAMBAH DATA -->
       <a href="<?= base_url('admin/penjualan/create'); ?>"
         class="py-2 px-20 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Tambah
         Data
       </a>
+
       <div class="flex gap-2">
-        <a href="<?= site_url('/penjualan/excel'); ?>"
-          class="flex items-center py-2 px-6 hover:bg-green-600 border-2 border-green-600 focus:ring-green-600 focus:ring-offset-green-200 text-green-600 hover:text-white transition ease-in duration-300 text-center text-base font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"><svg
-            xmlns="http://www.w3.org/2000/svg" class="fill-current h-6 w-6" viewBox="0 0 24 24">
-            <path
-              d="M18 22a2 2 0 0 0 2-2v-5l-5 4v-3H8v-2h7v-3l5 4V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12zM13 4l5 5h-5V4z">
-            </path>
-          </svg>Excel
-        </a>
-        <a href="<?= site_url('/penjualan/pdf'); ?>"
-          class="flex items-center py-2 px-6 hover:bg-rose-600 border-2 border-rose-600 focus:ring-rose-500 focus:ring-offset-rose-200 text-rose-500 hover:text-white transition ease-in duration-300 text-center text-base font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"><svg
-            xmlns="http://www.w3.org/2000/svg" class="fill-current h-6 w-6" viewBox="0 0 24 24">
-            <path
-              d="M8.267 14.68c-.184 0-.308.018-.372.036v1.178c.076.018.171.023.302.023.479 0 .774-.242.774-.651 0-.366-.254-.586-.704-.586zm3.487.012c-.2 0-.33.018-.407.036v2.61c.077.018.201.018.313.018.817.006 1.349-.444 1.349-1.396.006-.83-.479-1.268-1.255-1.268z">
-            </path>
-            <path
-              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM9.498 16.19c-.309.29-.765.42-1.296.42a2.23 2.23 0 0 1-.308-.018v1.426H7v-3.936A7.558 7.558 0 0 1 8.219 14c.557 0 .953.106 1.22.319.254.202.426.533.426.923-.001.392-.131.723-.367.948zm3.807 1.355c-.42.349-1.059.515-1.84.515-.468 0-.799-.03-1.024-.06v-3.917A7.947 7.947 0 0 1 11.66 14c.757 0 1.249.136 1.633.426.415.308.675.799.675 1.504 0 .763-.279 1.29-.663 1.615zM17 14.77h-1.532v.911H16.9v.734h-1.432v1.604h-.906V14.03H17v.74zM14 9h-1V4l5 5h-4z">
-            </path>
-          </svg>PDF</a>
+        <!-- EXCEL -->
+        <div x-data="modal">
+          <button @click="toggle"
+            class="flex items-center py-2 px-6 hover:bg-green-600 border-2 border-green-600 focus:ring-green-600 focus:ring-offset-green-200 text-green-600 hover:text-white transition ease-in duration-300 text-center text-base font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"><svg
+              xmlns="http://www.w3.org/2000/svg" class="fill-current h-6 w-6" viewBox="0 0 24 24">
+              <path
+                d="M18 22a2 2 0 0 0 2-2v-5l-5 4v-3H8v-2h7v-3l5 4V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12zM13 4l5 5h-5V4z">
+              </path>
+            </svg>Excel
+          </button>
+
+          <div x-show="open" x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform scale-90"
+            x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 transform scale-100"
+            x-transition:leave-end="opacity-0 transform scale-90"
+            class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50" id="modal-tambah">
+            <form action="<?= site_url('/penjualan/excel'); ?>" method="POST"
+              class="flex w-full mx-5 md:mx-0 max-w-sm space-x-3" autocomplete="off">
+              <?= csrf_field(); ?>
+              <div
+                class="w-full max-w-2xl px-5 py-10 m-auto bg-white border-2 border-indigo-500 rounded-lg shadow dark:bg-gray-800">
+                <div class="mb-6 text-3xl font-light text-center text-gray-800 dark:text-white">
+                  Export Excel
+                </div>
+                <div class="grid max-w-xl grid-cols-2 gap-4 m-auto">
+                  <div class="col-span-2">
+                    <div class="relative">
+                      <div class="text-sm text-neutral-500 font-light italic">Periode Mutasi</div>
+                      <label for="min" class="dark:text-white">Dari Tanggal:</label>
+                      <input type="date" id="minEx"
+                        class="rounded-lg border-transparent flex-1 appearance-none border border-neutral-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
+                        placeholder="Min tanggal" name="min" />
+                      <label for="max" class="dark:text-white">Sampai Tanggal:</label>
+                      <input type="date" id="maxEx"
+                        class="rounded-lg border-transparent flex-1 appearance-none border border-neutral-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
+                        placeholder="Max tanggal" name="max" />
+                      <div class="text-xs text-neutral-500 font-light italic">*Jika dikosongkan maka mencetak semua
+                        data.</div>
+                    </div>
+                  </div>
+                  <div class="col-span-2">
+                    <button type="submit" id="cetak-excel"
+                      class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                      Cetak
+                    </button>
+                  </div>
+                  <div class="col-span-2">
+                    <button id="cancel-tambah" @click="toggle" type="button"
+                      class="py-2 px-4 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-indigo-500 w-full transition ease-in duration-200 text-center text-base font-semibold border-2 border-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg">
+                      Batal
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- PDF -->
+        <div x-data="modal">
+          <button @click="toggle"
+            class="flex items-center py-2 px-6 hover:bg-rose-600 border-2 border-rose-600 focus:ring-rose-500 focus:ring-offset-rose-200 text-rose-500 hover:text-white transition ease-in duration-300 text-center text-base font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"><svg
+              xmlns="http://www.w3.org/2000/svg" class="fill-current h-6 w-6" viewBox="0 0 24 24">
+              <path
+                d="M8.267 14.68c-.184 0-.308.018-.372.036v1.178c.076.018.171.023.302.023.479 0 .774-.242.774-.651 0-.366-.254-.586-.704-.586zm3.487.012c-.2 0-.33.018-.407.036v2.61c.077.018.201.018.313.018.817.006 1.349-.444 1.349-1.396.006-.83-.479-1.268-1.255-1.268z">
+              </path>
+              <path
+                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM9.498 16.19c-.309.29-.765.42-1.296.42a2.23 2.23 0 0 1-.308-.018v1.426H7v-3.936A7.558 7.558 0 0 1 8.219 14c.557 0 .953.106 1.22.319.254.202.426.533.426.923-.001.392-.131.723-.367.948zm3.807 1.355c-.42.349-1.059.515-1.84.515-.468 0-.799-.03-1.024-.06v-3.917A7.947 7.947 0 0 1 11.66 14c.757 0 1.249.136 1.633.426.415.308.675.799.675 1.504 0 .763-.279 1.29-.663 1.615zM17 14.77h-1.532v.911H16.9v.734h-1.432v1.604h-.906V14.03H17v.74zM14 9h-1V4l5 5h-4z">
+              </path>
+            </svg>PDF</button>
+
+          <div x-show="open" x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform scale-90"
+            x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 transform scale-100"
+            x-transition:leave-end="opacity-0 transform scale-90"
+            class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50" id="modal-tambah">
+            <form action="<?= site_url('/penjualan/pdf'); ?>" method="POST"
+              class="flex w-full mx-5 md:mx-0 max-w-sm space-x-3" autocomplete="off">
+              <?= csrf_field(); ?>
+              <div
+                class="w-full max-w-2xl px-5 py-10 m-auto bg-white border-2 border-indigo-500 rounded-lg shadow dark:bg-gray-800">
+                <div class="mb-6 text-3xl font-light text-center text-gray-800 dark:text-white">
+                  Export PDF
+                </div>
+                <div class="grid max-w-xl grid-cols-2 gap-4 m-auto">
+                  <div class="col-span-2">
+                    <div class="relative">
+                      <div class="text-sm text-neutral-500 font-light italic">Periode Mutasi</div>
+                      <label for="min" class="dark:text-white">Dari Tanggal:</label>
+                      <input type="date" id="minPdf"
+                        class="rounded-lg border-transparent flex-1 appearance-none border border-neutral-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
+                        placeholder="Min tanggal" name="min" />
+                      <label for="max" class="dark:text-white">Sampai Tanggal:</label>
+                      <input type="date" id="maxPdf"
+                        class="rounded-lg border-transparent flex-1 appearance-none border border-neutral-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
+                        placeholder="Max tanggal" name="max" />
+                      <div class="text-xs text-neutral-500 font-light italic">*Jika dikosongkan maka mencetak semua
+                        data.</div>
+                    </div>
+                  </div>
+                  <div class="col-span-2">
+                    <button type="submit" id="cetak-pdf"
+                      class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                      Cetak
+                    </button>
+                  </div>
+                  <div class="col-span-2">
+                    <button id="cancel-tambah" @click="toggle" type="button"
+                      class="py-2 px-4 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-indigo-500 w-full transition ease-in duration-200 text-center text-base font-semibold border-2 border-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg">
+                      Batal
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -77,7 +183,7 @@
           <th>Nama Mobil</th>
           <th>Kategori</th>
           <th>Terjual</th>
-          <th>Option</th>
+          <th>Opsi</th>
         </tr>
       </thead>
       <tbody>
@@ -114,10 +220,34 @@
 <script>
 $(document).ready(function() {
   $('#table_id').DataTable({
+    "language": {
+      "lengthMenu": "Menampilkan _MENU_ entri",
+      "zeroRecords": "Data tidak ada / belum ditambahkan",
+      "info": "_PAGE_ dari _PAGES_ halaman",
+      "infoEmpty": "Belum ada data yang ditambahkan",
+      "infoFiltered": "(filter dari _MAX_ total data)",
+      "search": "Pencarian:",
+      "paginate": {
+        "first": "Pertama",
+        "last": "Terakhir",
+        "next": "Berikutnya",
+        "previous": "Sebelumnya"
+      },
+    },
     columnDefs: [{
       orderable: false,
       targets: [0, 3, 4]
     }]
+  });
+
+  $('#cetak-excel').click(function() {
+    $('#minEx').val('')
+    $('#maxEx').val('')
+  });
+
+  $('#cetak-pdf').click(function() {
+    $('#minPdf').val('')
+    $('#maxPdf').val('')
   });
 });
 </script>

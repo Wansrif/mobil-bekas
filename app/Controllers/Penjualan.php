@@ -39,27 +39,45 @@ class Penjualan extends BaseController
     // EXPORT EXCEL
     public function excel()
     {
-        $penjualan = $this->penjualan->orderBy('waktu', 'ASC')->findAll();
+        $data = [
+            'min' => $this->request->getVar('min'),
+            'max' => $this->request->getVar('max'),
+        ];
+        
+        if ($data['min'] && $data['max']) {
+            $date = $this->penjualan->getDate($data['min'], $data['max']);
+            $title= 'Periode Penjualan ' . Date("d-M-Y", strtotime($data['min'])) . ' sampai ' . Date("d-M-Y", strtotime($data['max']));
+        } else {
+            $date = $this->penjualan;
+            $title= 'Semua Periode Penjualan';
+        }
+        
+        $penjualan = $date->orderBy('waktu', 'ASC')->findAll();
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'Mobil')
-            ->setCellValue('B1', 'Pembeli')
-            ->setCellValue('C1', 'Whatsapp')
-            ->setCellValue('D1', 'Kategori')
-            ->setCellValue('E1', 'Terjual')
-            ->setCellValue('F1', 'Harga');
+            ->setCellValue('A3', 'Laporan Penjualan Dealer Mobil Bekas')
+            ->setCellValue('A4', $title)
+            ->setCellValue('A5', 'No')
+            ->setCellValue('B5', 'Mobil')
+            ->setCellValue('C5', 'Pembeli')
+            ->setCellValue('D5', 'Whatsapp')
+            ->setCellValue('E5', 'Kategori')
+            ->setCellValue('F5', 'Terjual')
+            ->setCellValue('G5', 'Harga');
 
-        $column = 2;
+        $column = 6;
+        $no = 1;
 
         foreach ($penjualan as $val) {
             $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A' . $column, $val['mobil'])
-                ->setCellValue('B' . $column, $val['pembeli'])
-                ->setCellValue('C' . $column, $val['whatsapp'])
-                ->setCellValue('D' . $column, $val['nama_kategori'])
-                ->setCellValue('E' . $column, $val['waktu'])
-                ->setCellValue('F' . $column, $val['harga']);
+                ->setCellValue('A' . $column, $no++)
+                ->setCellValue('B' . $column, $val['mobil'])
+                ->setCellValue('C' . $column, $val['pembeli'])
+                ->setCellValue('D' . $column, $val['whatsapp'])
+                ->setCellValue('E' . $column, $val['nama_kategori'])
+                ->setCellValue('F' . $column, Date("d-M-Y", strtotime($val['waktu'])))
+                ->setCellValue('G' . $column, $val['harga']);
 
             $column++;
         }
@@ -78,10 +96,21 @@ class Penjualan extends BaseController
     // EXPORT PDF
     public function pdf()
     {
-        $data = [
-            'penjualan' => $this->penjualan->orderBy('waktu', 'ASC')->findAll()
+        $keyword = [
+            'min' => $this->request->getVar('min'),
+            'max' => $this->request->getVar('max'),
         ];
 
+        if ($keyword['min'] && $keyword['max']) {
+            $date   = $this->penjualan->getDate($keyword['min'], $keyword['max']);
+            $title  = 'Periode Penjualan ' . Date("d-M-Y", strtotime($keyword['min'])) . ' sampai ' . Date("d-M-Y", strtotime($keyword['max']));
+        } else {
+            $date   = $this->penjualan;
+            $title  = 'Semua Periode Penjualan';
+        }
+
+        $data['periode'] = $title;
+        $data['penjualan'] = $date->orderBy('waktu', 'ASC')->findAll();
         $html = view('admin/penjualan/pdf', $data);
         
         // instantiate and use the dompdf class

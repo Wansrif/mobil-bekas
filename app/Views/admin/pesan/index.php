@@ -48,7 +48,7 @@
           <th>No.</th>
           <th>Nama</th>
           <th>Dikirim</th>
-          <th>Option</th>
+          <th>Opsi</th>
         </tr>
       </thead>
       <tbody>
@@ -57,7 +57,7 @@
         <tr>
           <td class="text-center"><?= $i++; ?></td>
           <td><?= $item['nama']; ?></td>
-          <td><?= $item['created_at']; ?></td>
+          <td><?= Date("d-M-Y H:i", strtotime($item['created_at'])); ?> WIB</td>
           <td>
             <div class="flex justify-center items-center space-x-3">
               <a href="<?= base_url('admin/pesan'); ?>/<?= $item['slug']; ?>"
@@ -82,7 +82,26 @@
 
 <script>
 $(document).ready(function() {
-  $('#table_id').DataTable();
+  $('#table_id').DataTable({
+    "language": {
+      "lengthMenu": "Menampilkan _MENU_ entri",
+      "zeroRecords": "Data tidak ada / belum ditambahkan",
+      "info": "_PAGE_ dari _PAGES_ halaman",
+      "infoEmpty": "Belum ada data yang ditambahkan",
+      "infoFiltered": "(filter dari _MAX_ total data)",
+      "search": "Pencarian:",
+      "paginate": {
+        "first": "Pertama",
+        "last": "Terakhir",
+        "next": "Berikutnya",
+        "previous": "Sebelumnya"
+      },
+    },
+    columnDefs: [{
+      orderable: false,
+      targets: 3,
+    }]
+  });
 });
 </script>
 

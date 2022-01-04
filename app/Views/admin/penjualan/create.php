@@ -101,7 +101,7 @@
               </span>
             </label>
             <select name="kategori"
-              class="rounded-lg border-transparent flex-1 appearance-none border border-neutral-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+              class="rounded-lg border-transparent flex-1 appearance-none border border-neutral-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent <?= ($validation->hasError('kategori')) ? 'border-rose-500' : '' ; ?>">
               <option value="">-- Pilih Kategori Mobil --</option>
               <?php foreach($kategori as $val) : ?>
               <option value="<?= $val['nama_kategori']; ?>"><?= $val['nama_kategori']; ?></option>
@@ -121,7 +121,7 @@
               </span>
             </label>
             <input type="text" id="whatsapp"
-              class="rounded-lg border-transparent flex-1 appearance-none border border-neutral-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent <?= ($validation->hasError('watsapp')) ? 'border-rose-500' : '' ; ?>"
+              class="rounded-lg border-transparent flex-1 appearance-none border border-neutral-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent <?= ($validation->hasError('whatsapp')) ? 'border-rose-500' : '' ; ?>"
               name="whatsapp" value="<?= old('whatsapp'); ?>" placeholder="08xxxxxxxxxx" />
             <div class="text-rose-500 text-xs pl-2">
               <?= $validation->getError('whatsapp'); ?>
@@ -155,7 +155,7 @@
               </span>
             </label>
             <input type="text" id="harga"
-              class="rounded-lg border-transparent flex-1 appearance-none border border-neutral-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent <?= ($validation->hasError('harga')) ? 'border-rose-500' : '' ; ?> "
+              class="rounded-lg border-transparent flex-1 appearance-none border border-neutral-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent <?= ($validation->hasError('harga')) ? 'border-rose-500' : '' ; ?>"
               name="harga" value="<?= old('harga'); ?>" placeholder="Rp.xxx.xxx.xxx" />
             <div class="text-rose-500 text-xs pl-2">
               <?= $validation->getError('harga'); ?>
