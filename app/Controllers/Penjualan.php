@@ -55,18 +55,19 @@ class Penjualan extends BaseController
         $penjualan = $date->orderBy('waktu', 'ASC')->findAll();
         $spreadsheet = new Spreadsheet();
 
+        $kolom = 4;
         $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A3', 'Laporan Penjualan Dealer Mobil Bekas')
-            ->setCellValue('A4', $title)
-            ->setCellValue('A5', 'No')
-            ->setCellValue('B5', 'Mobil')
-            ->setCellValue('C5', 'Pembeli')
-            ->setCellValue('D5', 'Whatsapp')
-            ->setCellValue('E5', 'Kategori')
-            ->setCellValue('F5', 'Terjual')
-            ->setCellValue('G5', 'Harga');
+            ->setCellValue('A2', 'Laporan Penjualan Dealer Mobil Bekas')
+            ->setCellValue('A3', $title)
+            ->setCellValue('A' . $kolom, 'No')
+            ->setCellValue('B' . $kolom, 'Mobil')
+            ->setCellValue('C' . $kolom, 'Pembeli')
+            ->setCellValue('D' . $kolom, 'Whatsapp')
+            ->setCellValue('E' . $kolom, 'Kategori')
+            ->setCellValue('F' . $kolom, 'Terjual')
+            ->setCellValue('G' . $kolom, 'Harga');
 
-        $column = 6;
+        $column = 5;
         $no = 1;
 
         foreach ($penjualan as $val) {
@@ -111,6 +112,7 @@ class Penjualan extends BaseController
 
         $data['periode'] = $title;
         $data['penjualan'] = $date->orderBy('waktu', 'ASC')->findAll();
+        
         $html = view('admin/penjualan/pdf', $data);
         
         // instantiate and use the dompdf class
@@ -176,10 +178,9 @@ class Penjualan extends BaseController
                 ]
             ],
             'mobil' => [
-                'rules' => 'required|is_unique[penjualan.mobil]',
+                'rules' => 'required',
                 'errors' => [
                 'is_unique' => 'Nama mobil sudah terdaftar',
-                'required'  => 'Masukkan nama mobil terlebih dahulu.',
                 ]
             ],
             'spesifikasi' => [

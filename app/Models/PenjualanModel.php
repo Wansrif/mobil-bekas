@@ -23,7 +23,8 @@ class PenjualanModel extends Model
 
     public function getDate($min, $max)
     {
-        return $this->table('penjualan')->where('waktu >=', $min)->where('waktu <=', $max);
+        // return $this->table('penjualan')->where('waktu >=', $min)->where('waktu <=', $max);
+        return $this->table('penjualan')->where("waktu BETWEEN '{$min}' AND '{$max}'");
     }
 
     public function countPenjualan()

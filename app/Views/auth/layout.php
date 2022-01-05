@@ -8,6 +8,11 @@
   <meta name="description" content="Mobil Bekas Margonda">
   <meta name="keywords" content="Mobil Bekas Margonda">
 
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn-icons-png.flaticon.com/512/6270/6270078.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cdn-icons-png.flaticon.com/512/6270/6270078.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cdn-icons-png.flaticon.com/512/6270/6270078.png">
+  <link rel="manifest" href="/site.webmanifest">
+
   <?= link_tag('asset/css/app.css'); ?>
   <?= link_tag('asset/css/hamburgers.css'); ?>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>

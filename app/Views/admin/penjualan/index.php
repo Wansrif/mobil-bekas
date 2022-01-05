@@ -241,13 +241,17 @@ $(document).ready(function() {
   });
 
   $('#cetak-excel').click(function() {
-    $('#minEx').val('')
-    $('#maxEx').val('')
+    setTimeout(() => {
+      $('#minEx').val('')
+      $('#maxEx').val('')
+    }, 500);
   });
 
   $('#cetak-pdf').click(function() {
-    $('#minPdf').val('')
-    $('#maxPdf').val('')
+    setTimeout(() => {
+      $('#minPdf').val('')
+      $('#maxPdf').val('')
+    }, 500);
   });
 });
 </script>
