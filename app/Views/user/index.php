@@ -13,9 +13,12 @@
             terpercaya
             <span class="text-amber-500 text-shadow-lg underline uppercase">Pafona Auto</span>
           </h1>
-          <button id="hub"
-            class="w-44 px-4 py-2 mt-4 text-sm font-medium text-white uppercase transition-colors duration-200 transform bg-indigo-500 rounded-md lg:w-auto hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500">HUBUNGI
-            SEGERA</button>
+          <a href="https://wa.me/6281211290066?text=Saya%20tertarik%20dengan%20mobil%20Anda%20yang%20dijual"
+            target="_blank">
+            <button id="hub"
+              class="w-44 px-4 py-2 mt-4 text-sm font-medium text-white uppercase transition-colors duration-200 transform bg-indigo-500 rounded-md lg:w-auto hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500">HUBUNGI
+              SEGERA</button>
+          </a>
         </div>
       </div>
     </div>
