@@ -16,7 +16,7 @@ class Kategori extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Kategori',
+            'title' => 'Kategori Laporan Penjualan',
         ];
 
         return view('admin/kategori/index', $data);

@@ -1,6 +1,6 @@
 <!-- DESKTOP -->
 
-<div x-show="sideOpen" @click.outside="sideOpen = false"
+<div x-cloak x-show="sideOpen" @click.outside="sideOpen = false"
   class="fixed z-50 hidden md:inline-flex bg-indigo-500 dark:bg-gray-700 overflow-y-auto overscroll-y-auto"
   x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-x-full"
   x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in duration-300"
@@ -165,7 +165,7 @@
 
 <!-- MOBILE NAVIGATION-->
 
-<div x-show="sideMobile" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50"
+<div x-cloak x-show="sideMobile" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50"
   x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-x-full"
   x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in duration-300"
   x-transition:leave-start="opacity-100 transform translate-x-0"

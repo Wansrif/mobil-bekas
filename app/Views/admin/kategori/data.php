@@ -25,7 +25,7 @@
                 class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Edit</button>
 
               <!-- MODAL UPDATE -->
-              <div x-show="open" x-transition:enter="transition ease-out duration-300"
+              <div x-cloak x-show="open" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 transform scale-90"
                 x-transition:enter-end="opacity-100 transform scale-100"
                 x-transition:leave="transition ease-in duration-300"
@@ -76,7 +76,7 @@
                 class="px-1 md:px-3 py-1 border-2 border-rose-500 focus:ring-rose-500 focus:ring-offset-indigo-200 text-rose-500 w-full transition ease-in duration-200 text-center text-sm md:text-base shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Delete</button>
 
               <!-- MODAL DELETE -->
-              <div x-show="open" x-transition:enter="transition ease-out duration-300"
+              <div x-cloak x-show="open" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 transform scale-90"
                 x-transition:enter-end="opacity-100 transform scale-100"
                 x-transition:leave="transition ease-in duration-300"

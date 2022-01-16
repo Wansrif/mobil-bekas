@@ -1,4 +1,4 @@
-<nav x-data="{navOpen : false}" class="fixed bg-indigo-500 shadow dark:bg-gray-900 z-30 w-full">
+<nav x-cloak x-data="{navOpen : false}" class="fixed bg-indigo-500 shadow dark:bg-gray-900 z-30 w-full">
   <div class="container px-6 py-0 md:py-4 mx-auto md:flex md:justify-between md:items-center">
     <div class="flex items-center justify-between">
       <div>
@@ -36,9 +36,9 @@
       class="absolute z-20 items-center bg-indigo-500 dark:bg-gray-800 w-full -mt-1 -ml-6 p-4 transition transform">
       <div class="flex flex-col md:flex-row md:mx-6 space-y-4 text-center">
         <a class="page-scroll my-1 text-base text-center font-medium text-amber-400 dark:text-amber-400 dark:hover:text-amber-500"
-          <?= (current_url() == site_url('/')) ? 'href="#home"' : 'href="'.  site_url('/') . '"' ?>>Home</a>
+          <?= (current_url() == site_url('/')) ? 'href="#home"' : 'href="'.  site_url('/') . '"' ?>>Beranda</a>
 
-        <div x-data="{ open: false }" class="text-center">
+        <div x-cloak x-data="{ open: false }" class="text-center">
           <button @click="open = ! open"
             class="my-1 text-base mx-auto font-medium text-amber-400 dark:text-amber-400 dark:hover:text-amber-500 flex items-center">Tipe
             <svg :class="open ? 'transform rotate-180' : ''" class="w-5 h-5 transition-transform"
@@ -70,7 +70,8 @@
         </div>
 
         <a class="page-scroll my-1 text-base text-center font-medium text-amber-400 dark:text-amber-400 dark:hover:text-amber-500"
-          <?= (current_url() == site_url('/')) ? 'href="#about"' : 'href="'.  base_url('#about') . '"' ?>>About</a>
+          <?= (current_url() == site_url('/')) ? 'href="#about"' : 'href="'.  base_url('#about') . '"' ?>>Tentang
+          Kami</a>
         <a class="page-scroll my-1 text-base text-center font-medium text-amber-400 dark:text-amber-400 dark:hover:text-amber-500"
           <?= (current_url() == site_url('/')) ? 'href="#kontak"' : 'href="'.  base_url('#kontak') . '"' ?>>Kontak</a>
         <?php if(logged_in()) : ?>
@@ -104,9 +105,9 @@
         </div>
 
         <a class="page-scroll my-1 text-base font-medium text-amber-400 dark:text-amber-400 dark:hover:text-amber-500 md:mx-4 md:my-0 duration-300"
-          <?= (current_url() == site_url('/')) ? 'href="#home"' : 'href="'.  site_url('/') . '"' ?>>Home</a>
+          <?= (current_url() == site_url('/')) ? 'href="#home"' : 'href="'.  site_url('/') . '"' ?>>Beranda</a>
 
-        <div x-data="{ open: false }">
+        <div x-cloak x-data="{ open: false }">
           <button @click="open = !open"
             class="my-1 text-base font-medium text-amber-400 dark:text-amber-400 dark:hover:text-amber-500 md:mx-4 md:my-0 flex items-center duration-300">Tipe
             <svg :class="open ? 'transform rotate-180' : ''" class="w-5 h-5 transition-transform"
@@ -138,7 +139,8 @@
         </div>
 
         <a class="page-scroll my-1 text-base font-medium text-amber-400 dark:text-amber-400 dark:hover:text-amber-500 md:mx-4 md:my-0 duration-300"
-          <?= (current_url() == site_url('/')) ? 'href="#about"' : 'href="'.  base_url('#about') . '"' ?>>About</a>
+          <?= (current_url() == site_url('/')) ? 'href="#about"' : 'href="'.  base_url('#about') . '"' ?>>Tentang
+          Kami</a>
         <a class="page-scroll my-1 text-base font-medium text-amber-400 dark:text-amber-400 dark:hover:text-amber-500 md:mx-4 md:my-0 duration-300"
           <?= (current_url() == site_url('/')) ? 'href="#kontak"' : 'href="'.  base_url('#kontak') . '"' ?>>Kontak</a>
       </div>
