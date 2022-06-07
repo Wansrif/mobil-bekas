@@ -8,7 +8,7 @@ class Toyota extends BaseController
 {
     public function index()
     {
-        $keyword = $this->request->getVar('keyword', FILTER_SANITIZE_STRING);
+        $keyword = $this->request->getVar('keyword', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if($keyword) {
         $toyota = $this->toyota->search($keyword);
         } else {
