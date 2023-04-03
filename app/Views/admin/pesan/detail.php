@@ -27,7 +27,7 @@
       </button>
 
       <!-- MODAL -->
-      <div x-cloak x-show="open" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50"
+      <div x-show="open" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50"
         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-90"
         x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-300"
         x-transition:leave-start="opacity-100 transform scale-100"
@@ -42,7 +42,7 @@
                 </path>
               </svg>
               <p class="text-gray-800 dark:text-gray-200 text-xl font-bold mt-4">
-                Hapus Pesan
+                Hapus data
               </p>
               <p class="text-gray-600 dark:text-gray-400 text-xs py-2 px-6">
                 Apakah anda sudah yakin ?

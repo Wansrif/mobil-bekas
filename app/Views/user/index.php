@@ -28,7 +28,7 @@
       <div class="container px-5 py-8 mx-auto">
         <h1
           class="text-center sm:text-3xl text-2xl font-medium font-viga uppercase mb-12 text-gray-900 dark:text-white py-3 border-b-4 border-indigo-400 dark:border-white">
-          Tentang Kami
+          About
         </h1>
         <p class="text-gray-900 dark:text-white text-center prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto">
           Pafona Auto merupakan sebuah dealer mobil bekas yang memberikan informasi dan penjualan mobil bekas yang
